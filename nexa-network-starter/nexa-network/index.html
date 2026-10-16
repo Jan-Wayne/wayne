@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1746a2">
+  <title>Nexa — Professional Network</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Nexa home"><span class="brand-mark">N</span><span>nexa<span class="brand-dot">.</span></span></a>
+    <div class="search-wrap"><span>⌕</span><input id="global-search" type="search" placeholder="Search people, posts, or jobs" aria-label="Search"></div>
+    <nav class="top-actions" id="top-actions">
+      <button class="text-button" data-auth-view="signin">Sign in</button>
+      <button class="button button-primary button-small" data-auth-view="signup">Join now</button>
+    </nav>
+    <nav class="member-actions hidden" id="member-actions">
+      <button class="nav-button active" data-page="feed"><span>⌂</span><small>Home</small></button>
+      <button class="nav-button" data-page="network"><span>♧</span><small>Network</small></button>
+      <button class="nav-button" data-page="jobs"><span>▣</span><small>Jobs</small></button>
+      <button class="nav-button" data-page="profile"><span>◉</span><small>Profile</small></button>
+      <button class="nav-button" id="logout-button"><span>↪</span><small>Sign out</small></button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="landing-view" class="landing-view">
+      <div class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow"><span class="eyebrow-dot"></span> YOUR NEXT OPPORTUNITY STARTS HERE</span>
+          <h1>Build your future.<br><span>Connect with people.</span></h1>
+          <p>Meet professionals, share what you know, discover career opportunities, and grow your network — all in one place.</p>
+          <div class="hero-buttons">
+            <button class="button button-primary button-large" data-auth-view="signup">Create your account <span>→</span></button>
+            <button class="button button-outline button-large" data-auth-view="signin">Sign in</button>
+          </div>
+          <div class="hero-proof"><div class="avatar-stack"><span>J</span><span>M</span><span>A</span><span>+</span></div><p><strong>Your professional community</strong><br><small>Start with a profile. Grow one connection at a time.</small></p></div>
+        </div>
+        <div class="hero-art">
+          <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+          <div class="floating-tag tag-top">✦ New opportunities</div>
+          <article class="preview-card">
+            <div class="preview-top"><div class="avatar avatar-purple">SC</div><div><strong>Sarah Chen</strong><small>Product Designer · Manila</small></div><span class="online-dot"></span></div>
+            <p class="preview-post">Great design begins with understanding people. Excited to share what our team has been building! ✨</p>
+            <div class="preview-image"><div class="preview-shape shape-a"></div><div class="preview-shape shape-b"></div><div class="preview-shape shape-c"></div><span>DESIGN<br>WITH PURPOSE</span></div>
+            <div class="preview-stats">♡ 128 reactions <span>24 comments</span></div>
+          </article>
+          <div class="floating-tag tag-bottom"><span class="tag-icon">↗</span><span><strong>Career growth</strong><small>Starts with a connection</small></span></div>
+        </div>
+      </div>
+      <section class="feature-section"><div class="section-heading"><span class="eyebrow">MADE FOR YOUR NEXT CHAPTER</span><h2>A network that moves you forward.</h2><p>Build meaningful professional relationships and make your next move with confidence.</p></div>
+        <div class="feature-grid">
+          <article class="feature-card"><div class="feature-icon icon-blue">♧</div><h3>Build your network</h3><p>Connect with classmates, colleagues, mentors, and people working in your field.</p></article>
+          <article class="feature-card"><div class="feature-icon icon-violet">↗</div><h3>Find opportunities</h3><p>Explore job listings and discover roles that match your skills and ambitions.</p></article>
+          <article class="feature-card"><div class="feature-icon icon-orange">✦</div><h3>Share your ideas</h3><p>Post updates, celebrate progress, and learn from your professional community.</p></article>
+        </div>
+      </section>
+    </section>
+
+    <section id="auth-view" class="auth-view hidden">
+      <div class="auth-card">
+        <a class="brand auth-brand" href="#"><span class="brand-mark">N</span><span>nexa<span class="brand-dot">.</span></span></a>
+        <h2 id="auth-heading">Welcome back</h2><p id="auth-description">Sign in to continue to your network.</p>
+        <div class="auth-tabs"><button id="signin-tab" class="auth-tab active">Sign in</button><button id="signup-tab" class="auth-tab">Create account</button></div>
+        <form id="auth-form">
+          <label id="name-label" class="field hidden">Full name<input id="auth-name" type="text" autocomplete="name" placeholder="Your full name" minlength="2"></label>
+          <label class="field">Email address<input id="auth-email" type="email" autocomplete="email" required placeholder="you@example.com"></label>
+          <label class="field">Password<input id="auth-password" type="password" autocomplete="current-password" required minlength="8" placeholder="At least 8 characters"><span class="field-hint">Use at least 8 characters.</span></label>
+          <label id="terms-label" class="terms hidden"><input id="auth-terms" type="checkbox"><span>I agree to use Nexa respectfully and follow the community guidelines.</span></label>
+          <button id="auth-submit" class="button button-primary button-large full-width" type="submit">Sign in</button>
+        </form>
+        <button id="forgot-password" class="link-button">Forgot your password?</button>
+        <p class="auth-legal">By continuing, you agree to our community guidelines. Never reuse a password from another site.</p>
+        <button id="back-to-home" class="back-link">← Back to home</button>
+      </div>
+    </section>
+
+    <section id="app-view" class="app-view hidden">
+      <div class="app-layout">
+        <aside class="left-column">
+          <article class="profile-mini card">
+            <div class="cover"></div><div id="mini-avatar" class="avatar avatar-large">N</div>
+            <div class="profile-mini-body"><h3 id="mini-name">Your name</h3><p id="mini-headline">Add a professional headline</p><div class="mini-divider"></div><div class="mini-metric"><span>Profile views</span><strong id="profile-views">—</strong></div><div class="mini-metric"><span>Connections</span><strong id="connection-count">0</strong></div></div>
+            <button class="mini-edit" data-page="profile">Edit your profile →</button>
+          </article>
+          <article class="card side-tip"><span class="tip-icon">✦</span><strong>Make your profile stand out</strong><p>Add your headline, location, and skills so people know what you bring to the table.</p><button data-page="profile" class="link-button">Complete profile</button></article>
+        </aside>
+        <section class="center-column">
+          <div id="feed-page" class="page-panel">
+            <article class="composer card"><div class="composer-row"><div id="composer-avatar" class="avatar">N</div><button id="composer-open" class="composer-trigger">Share something with your network...</button></div>
+              <form id="post-form" class="hidden"><label class="sr-only" for="post-content">Write a post</label><textarea id="post-content" maxlength="3000" rows="4" placeholder="What would you like to share?"></textarea><div class="composer-footer"><span id="char-count">0 / 3000</span><button class="button button-primary" type="submit">Publish post</button></div></form>
+              <div class="composer-options"><button id="write-post-button">▤ <span>Write a post</span></button><button data-page="jobs">▣ <span>Explore jobs</span></button></div>
+            </article>
+            <div class="feed-heading"><span>YOUR FEED</span><span class="feed-line"></span><select id="feed-sort" aria-label="Sort posts"><option value="new">Recent</option></select></div>
+            <div id="feed-list" class="feed-list"><div class="loading-card card">Loading your community…</div></div>
+          </div>
+          <div id="network-page" class="page-panel hidden"><div class="page-title"><div><span class="eyebrow">YOUR COMMUNITY</span><h2>Grow your network</h2><p>Discover people and build professional relationships.</p></div></div><div id="network-list" class="people-grid"></div></div>
+          <div id="jobs-page" class="page-panel hidden"><div class="page-title"><div><span class="eyebrow">TAKE THE NEXT STEP</span><h2>Explore opportunities</h2><p>Find a role that fits your next chapter.</p></div></div><div class="job-search"><input id="job-search-input" type="search" placeholder="Search job title, company, or location"><button id="job-search-button" class="button button-primary">Search</button></div><div id="jobs-list" class="jobs-list"></div><p class="demo-note">Job listings are sample content until you connect a verified jobs data source.</p></div>
+          <div id="profile-page" class="page-panel hidden"><div class="page-title"><div><span class="eyebrow">YOUR PROFESSIONAL STORY</span><h2>Your profile</h2><p>Help your network understand who you are and what you do.</p></div></div><article class="card profile-editor"><div class="profile-cover"></div><div class="profile-editor-avatar" id="profile-editor-avatar">N</div><form id="profile-form" class="profile-form"><label class="field">Full name<input id="profile-name" required maxlength="80"></label><label class="field">Professional headline<input id="profile-headline" maxlength="140" placeholder="e.g. Student | Aspiring Software Developer"></label><label class="field">Location<input id="profile-location" maxlength="100" placeholder="e.g. Quezon City, Philippines"></label><label class="field">About<textarea id="profile-about" rows="5" maxlength="1200" placeholder="Share a little about your experience, interests, and goals."></textarea></label><label class="field">Skills <span class="field-hint">Separate skills with commas.</span><input id="profile-skills" maxlength="500" placeholder="JavaScript, UI design, communication"></label><div class="form-actions"><span id="profile-status" class="form-status"></span><button class="button button-primary" type="submit">Save profile</button></div></form></article></div>
+        </section>
+        <aside class="right-column">
+          <article class="card news-card"><div class="news-heading"><h3>Trending in your network</h3><span>✦</span></div><div class="trend"><span class="trend-dot"></span><div><strong>Skills that move careers</strong><small>Professional development</small></div></div><div class="trend"><span class="trend-dot"></span><div><strong>Building your portfolio</strong><small>Career conversations</small></div></div><div class="trend"><span class="trend-dot"></span><div><strong>Meet your next mentor</strong><small>Community spotlight</small></div></div><p class="trend-note">Explore topics and learn from people in your field.</p></article>
+          <article class="card right-cta"><div class="cta-symbol">N.</div><h3>Your next chapter is a connection away.</h3><p>Keep showing up, sharing, and learning.</p><button data-page="network" class="link-button">Find people →</button></article>
+          <div class="footer-links">About · Community guidelines · Privacy<br><span>© 2026 Nexa Network</span></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <div id="modal-backdrop" class="modal-backdrop hidden"><section class="modal card" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button id="modal-close" class="modal-close" aria-label="Close">×</button><h2 id="modal-title">Connect with Nexa</h2><div id="modal-content"></div></section></div>
+</body>
+</html>
